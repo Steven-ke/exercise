@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" name="QQ" id="QQ" value="" />
+		<span></span>
+		<pre style="color: red;font-size: 30px;">
+		QQ的规则：
+			1. 全都是数字
+			2. 最少5最多11
+			3. 开头不能为0 
+
+		^ 字符串的开头
+		$ 字符串的结尾
+</pre>
+		<script type="text/javascript">
+			let qq = document.querySelector('#QQ');
+			let span = document.querySelector('span');
+			let re = /^[1-9]\d{5,11}$/
+			qq.oninput = function(){
+				if(re.test(qq.value)){
+					span.innerHTML = '恭喜你'
+				}else{
+					span.innerHTML = '别闹，好好写'
+				}
+			}
+		</script>
+	</body>
+</html>

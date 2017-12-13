@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			input,div{
+				margin: 0;
+				display: block;
+				margin:0px auto;
+			}
+			div{
+				width:160px;
+				font:12px/12px "微软雅黑";
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				let textBox = document.querySelector('input');
+				let tip = document.querySelector('div');
+				
+				let re = /\d/;//规则是定为是数字类型
+				let re1 = /\d+/g;//规则设定为最少出现1，最多不限  {1,}。一起出现的数字可以一起打印出来
+				let re2 = /1|3|5|7/g;//规则设定过敏词为，1，3，5，7
+				textBox.oninput = function(){
+					//将text.value使用match（）按照规则re2把字母排除。将所有的数字放到数组中，再判断数组是否为空，不为空的话就将数组转为字符串
+					let aaa = (textBox.value.match(re1))?(textBox.value.match(re1)).join():'';
+					//然后再用拼出来的字符串去去除敏感词1，3，5，7
+					let bbb = aaa.replace(re2,function($0){
+							return '*'.repeat($0.length)
+						})
+					//用re.test方法检测text的内容
+					if(!re.test(textBox.value)){
+						tip.style.color = 'red'
+						tip.innerHTML = "没有输入数字"
+					}else{
+						tip.style.color = 'green'
+						tip.innerHTML = `有输入数字，输入的数字为：${bbb}`
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" name="" id="" value="" />
+		<div></div>
+		<pre style="color: red;font-size: 30px;">
+在输入的过程中
+	1. 如果没有输入数字，则显示“没有输入数字”
+	2. 有输入数字了，就显示“输入数字啦,数字为：468,0,4”
+		输入数字规则：
+			a. 连续输入的数字，要在一起显示
+			b.如果输入的数字为 1,3,5,7 则用*代替
+</pre>
+	</body>
+</html>
